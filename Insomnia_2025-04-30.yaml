@@ -1,0 +1,105 @@
+type: collection.insomnia.rest/5.0
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1746050252635
+  modified: 1746050252635
+collection:
+  - url: http://localhost:8080/aws-challenge/api/v1/user/:uuid
+    name: Get user Joe
+    meta:
+      id: req_c5925d7d6b6e496db7dc5da7f5227ca9
+      created: 1746050699000
+      modified: 1746052074930
+      isPrivate: false
+      sortKey: -1746050699000
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    scripts:
+      afterResponse: |-
+        const response = insomnia.response.json();
+        insomnia.expect(response.documentId).to.eql("123456789");
+        insomnia.expect(response.name).to.eql("Joe");
+        insomnia.expect(response.email).to.eql("joe@example.com");
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+    pathParameters:
+      - name: uuid
+        value: 745e1209-6aa6-44e6-8e30-720713bdca2f
+  - url: http://localhost:8080/aws-challenge/api/v1/user/:uuid
+    name: Get user by uuid
+    meta:
+      id: req_ae5862709ef1484eafa7d95d56895bed
+      created: 1746051180936
+      modified: 1746051875951
+      isPrivate: false
+      sortKey: -1746050698950
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    scripts:
+      afterResponse: "\n"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+    pathParameters:
+      - name: uuid
+  - url: http://localhost:8080/aws-challenge/api/v1/user
+    name: "Create user "
+    meta:
+      id: req_f85d412d052f4b488b44f558983e49f7
+      created: 1746051889974
+      modified: 1746052256650
+      isPrivate: false
+      sortKey: -1746050698900
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"documentId": "CC123456789",
+        	"name": "Insomnia User",
+        	"email": "insomnia@example.com"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.2
+    scripts:
+      afterResponse: "\n"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1746050682186
+    modified: 1746052267551
+environments:
+  name: Base Environment
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1746050681901
+    modified: 1746052267553
+    isPrivate: false
