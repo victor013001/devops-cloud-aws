@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: devops-cloud-aws
+  webflux:
+    base-path: /aws-challenge
+  datasource:
+    url: jdbc:h2:mem:peopleDB
+    driver-class-name: org.h2.Driver
+    username: admin
+    password: admin
+  r2dbc:
+    url: r2dbc:h2:mem:///peopleDB
+    username: admin
+    password: admin
+  flyway:
+    enabled: true
+    url: jdbc:h2:mem://peopleDB
+    user: admin
+    password: admin
+
