@@ -26,7 +26,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<UserDto> createUser(@Valid final UserDto userDto) {
+    public Mono<UserDto> createUser(@Valid @RequestBody final UserDto userDto) {
         log.info("{} Creating User with Name {} and document Id {}", LOG_PREFIX, userDto.name(), userDto.documentId());
         return userService.createUser(userDto);
     }
