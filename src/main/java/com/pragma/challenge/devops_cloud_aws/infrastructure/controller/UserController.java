@@ -14,20 +14,24 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/user")
 public class UserController {
-    private static final String LOG_PREFIX = "[User_Controller_V1] >>> ";
+  private static final String LOG_PREFIX = "[User_Controller_V1] >>> ";
 
-    private final UserService userService;
+  private final UserService userService;
 
-    @GetMapping("/{uuid}")
-    public Mono<UserDto> getUserByUuid(@Valid @PathVariable final String uuid) {
-        log.info("{} Finding User with UUID {}", LOG_PREFIX, uuid);
-        return userService.findUserByUuid(uuid);
-    }
+  @GetMapping("/{uuid}")
+  public Mono<UserDto> getUserByUuid(@Valid @PathVariable final String uuid) {
+    log.info("{} Finding User with UUID {}", LOG_PREFIX, uuid);
+    return userService.findUserByUuid(uuid);
+  }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Mono<UserDto> createUser(@Valid @RequestBody final UserDto userDto) {
-        log.info("{} Creating User with Name {} and document Id {}", LOG_PREFIX, userDto.name(), userDto.documentId());
-        return userService.createUser(userDto);
-    }
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public Mono<UserDto> createUser(@Valid @RequestBody final UserDto userDto) {
+    log.info(
+        "{} Creating User with Name {} and document Id {}",
+        LOG_PREFIX,
+        userDto.name(),
+        userDto.documentId());
+    return userService.createUser(userDto);
+  }
 }

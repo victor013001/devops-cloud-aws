@@ -12,14 +12,14 @@ import java.util.UUID;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper {
-    User toUser(UserDto userDto);
+  User toUser(UserDto userDto);
 
-    UserDto toUserDto(User user);
+  UserDto toUserDto(User user);
 
-    @AfterMapping
-    default void setUuid(@MappingTarget User user) {
-        if (Objects.isNull(user.getUuid())) {
-            user.setUuid(UUID.randomUUID().toString());
-        }
+  @AfterMapping
+  default void setUuid(@MappingTarget User user) {
+    if (Objects.isNull(user.getUuid())) {
+      user.setUuid(UUID.randomUUID().toString());
     }
+  }
 }

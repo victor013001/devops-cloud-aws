@@ -15,21 +15,18 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
+  private final UserRepository userRepository;
+  private final UserMapper userMapper;
 
-    @Override
-    @Transactional
-    public Mono<UserDto> createUser(UserDto userDto) {
-        userRepository.findAll()
-                .log();
-        return userRepository.save(userMapper.toUser(userDto))
-                .map(userMapper::toUserDto);
-    }
+  @Override
+  @Transactional
+  public Mono<UserDto> createUser(UserDto userDto) {
+    userRepository.findAll().log();
+    return userRepository.save(userMapper.toUser(userDto)).map(userMapper::toUserDto);
+  }
 
-    @Override
-    public Mono<UserDto> findUserByUuid(String uuid) {
-        return userRepository.findById(1L)
-                .map(userMapper::toUserDto);
-    }
+  @Override
+  public Mono<UserDto> findUserByUuid(String uuid) {
+    return userRepository.findByUuid(uuid).map(userMapper::toUserDto);
+  }
 }

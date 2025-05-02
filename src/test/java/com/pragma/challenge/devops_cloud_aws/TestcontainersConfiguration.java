@@ -4,11 +4,10 @@ import org.testcontainers.containers.MySQLContainer;
 
 class TestcontainersConfiguration {
 
-    static MySQLContainer<?> mysqlContainer() {
-        return new MySQLContainer<>("mysql:8")
-                .withDatabaseName("it_db")
-                .withUsername("admin")
-                .withPassword("admin");
-    }
-
+  static MySQLContainer<?> mysqlContainer() {
+    return new MySQLContainer<>("mysql:8")
+        .withDatabaseName("it_db")
+        .withUsername("admin")
+        .withPassword("admin");
+  }
 }
