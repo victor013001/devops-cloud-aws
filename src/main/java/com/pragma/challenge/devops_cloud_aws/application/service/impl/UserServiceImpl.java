@@ -1,8 +1,9 @@
 package com.pragma.challenge.devops_cloud_aws.application.service.impl;
 
+import com.pragma.challenge.devops_cloud_aws.application.dto.UserDto;
 import com.pragma.challenge.devops_cloud_aws.application.mapper.UserMapper;
 import com.pragma.challenge.devops_cloud_aws.application.service.UserService;
-import com.pragma.challenge.devops_cloud_aws.infrastructure.dto.UserDto;
+import com.pragma.challenge.devops_cloud_aws.infrastructure.dto.UserRequest;
 import com.pragma.challenge.devops_cloud_aws.infrastructure.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +21,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional
-  public Mono<UserDto> createUser(UserDto userDto) {
+  public Mono<UserDto> createUser(UserRequest userRequest) {
     userRepository.findAll().log();
-    return userRepository.save(userMapper.toUser(userDto)).map(userMapper::toUserDto);
+    return userRepository.save(userMapper.toUser(userRequest)).map(userMapper::toUserDto);
   }
 
   @Override

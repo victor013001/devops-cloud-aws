@@ -1,7 +1,8 @@
 package com.pragma.challenge.devops_cloud_aws.infrastructure.controller;
 
+import com.pragma.challenge.devops_cloud_aws.application.dto.UserDto;
 import com.pragma.challenge.devops_cloud_aws.application.service.UserService;
-import com.pragma.challenge.devops_cloud_aws.infrastructure.dto.UserDto;
+import com.pragma.challenge.devops_cloud_aws.infrastructure.dto.UserRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,12 +27,12 @@ public class UserController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Mono<UserDto> createUser(@Valid @RequestBody final UserDto userDto) {
+  public Mono<UserDto> createUser(@Valid @RequestBody final UserRequest userRequest) {
     log.info(
         "{} Creating User with Name {} and document Id {}",
         LOG_PREFIX,
-        userDto.name(),
-        userDto.documentId());
-    return userService.createUser(userDto);
+        userRequest.name(),
+        userRequest.documentId());
+    return userService.createUser(userRequest);
   }
 }
