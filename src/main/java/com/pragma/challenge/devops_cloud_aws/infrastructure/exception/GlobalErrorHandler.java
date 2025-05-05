@@ -1,10 +1,12 @@
 package com.pragma.challenge.devops_cloud_aws.infrastructure.exception;
 
+import com.pragma.challenge.devops_cloud_aws.infrastructure.exception.util.Exceptions;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
@@ -50,13 +52,20 @@ public class GlobalErrorHandler implements ErrorWebExceptionHandler {
                   .collect(Collectors.joining(","))
                   .getBytes()));
     }
+    if (ex instanceof DuplicateKeyException) {
+      return writeExchangeResponse(
+          exchange,
+          HttpStatus.BAD_REQUEST,
+          dataBufferFactory.wrap(Exceptions.DUPLICATE_KEY.getBytes()));
+    }
+
     return writeExchangeResponse(
         exchange,
         HttpStatus.INTERNAL_SERVER_ERROR,
         dataBufferFactory.wrap(
             StandardError.builder()
                 .code("E000")
-                .description("Server error")
+                .description(Exceptions.SERVER_ERROR)
                 .timestamp(LocalDateTime.now())
                 .build()
                 .toString()
