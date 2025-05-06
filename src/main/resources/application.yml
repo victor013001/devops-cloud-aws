@@ -27,7 +27,6 @@ spring:
               - openid
               - phone
               - profile
-            redirect-uri: ${APP_BASE_URL}/aws-challenge/login/oauth2/code/cognito
         provider:
           cognito:
             issuer-uri: https://cognito-idp.${COGNITO_REGION}.amazonaws.com/${COGNITO_USER_POOL_ID}
