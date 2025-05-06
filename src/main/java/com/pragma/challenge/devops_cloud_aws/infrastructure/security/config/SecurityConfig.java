@@ -26,7 +26,13 @@ public class SecurityConfig {
   // TODO find a way to build authorities
   @Bean
   SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-    return http.authorizeExchange(exchanges -> exchanges.anyExchange().authenticated())
+    return http.authorizeExchange(
+            exchanges ->
+                exchanges
+                    .pathMatchers("/actuator/health")
+                    .permitAll()
+                    .anyExchange()
+                    .authenticated())
         .oauth2Login(Customizer.withDefaults())
         .oauth2ResourceServer(
             oauth2 ->
