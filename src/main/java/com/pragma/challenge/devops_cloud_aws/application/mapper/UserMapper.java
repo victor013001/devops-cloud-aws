@@ -1,7 +1,8 @@
 package com.pragma.challenge.devops_cloud_aws.application.mapper;
 
+import com.pragma.challenge.devops_cloud_aws.application.dto.UserDto;
 import com.pragma.challenge.devops_cloud_aws.domain.model.User;
-import com.pragma.challenge.devops_cloud_aws.infrastructure.dto.UserDto;
+import com.pragma.challenge.devops_cloud_aws.infrastructure.dto.UserRequest;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -12,7 +13,7 @@ import java.util.UUID;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper {
-  User toUser(UserDto userDto);
+  User toUser(UserRequest userRequest);
 
   UserDto toUserDto(User user);
 
