@@ -12,29 +12,6 @@ spring:
     url: jdbc:mysql://${DB_URL}:${DB_PORT}/${DB_SCHEMA}
     user: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-  security:
-    oauth2:
-      client:
-        registration:
-          cognito:
-            client-id: ${COGNITO_CLIENT_ID}
-            client-secret: ${COGNITO_CLIENT_SECRET}
-            scope:
-              - aws.cognito.signin.user.admin
-              - devops-cloud-aws-RS/getUser
-              - devops-cloud-aws-RS/modifyUser
-              - email
-              - openid
-              - phone
-              - profile
-            redirect-uri: ${REDIRECT_URI}/aws-challenge/login/oauth2/code/cognito
-        provider:
-          cognito:
-            issuer-uri: https://cognito-idp.${COGNITO_REGION}.amazonaws.com/${COGNITO_USER_POOL_ID}
-        resourceserver:
-          jwt:
-            issuer-uri: https://cognito-idp.${COGNITO_REGION}.amazonaws.com/${COGNITO_USER_POOL_ID}
-            jwk-set-uri: https://cognito-idp.${COGNITO_REGION}.amazonaws.com/${COGNITO_USER_POOL_ID}/.well-known/jwks.json
 
 
 
