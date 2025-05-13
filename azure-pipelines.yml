@@ -14,8 +14,6 @@ stages:
   - job: BuildJob
     displayName: 'Build Job'
     steps:
-    - script: echo "Validating quality..."
-      displayName: 'Valid Application'
     - script: echo "Building the application..."
       displayName: 'Build Application'
     - script: echo "Running tests..."
