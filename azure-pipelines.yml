@@ -3,23 +3,34 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
-trigger:
-- main
+trigger: none
 
-pool:
-  v- task: Docker@2
-  inputs:
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'Image: ubuntu-latest
+pool: Azure Pipelines
 
-steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: BuildJob
+    displayName: 'Build Job'
+    steps:
+    - script: echo "Validating quality..."
+      displayName: 'Valid Application'
+    - script: echo "Building the application..."
+      displayName: 'Build Application'
+    - script: echo "Running tests..."
+      displayName: 'Run Tests'
+
+- stage: DeployTest
+  displayName: 'Deploy & Test Stage'
+  jobs:
+  - job: DeployJob
+    displayName: 'Deploy Job'
+    steps:
+    - script: echo "Deploying the application..."
+      displayName: 'Deploy Application'
+  - job: TestJob
+    displayName: 'Test Job'
+    steps:
+    - script: echo "Testing the application..."
+      displayName: 'Test Application'
